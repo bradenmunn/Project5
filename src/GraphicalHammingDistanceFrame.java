@@ -1,10 +1,16 @@
 import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Insets;
 
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 /**
@@ -46,8 +52,8 @@ public class GraphicalHammingDistanceFrame extends JFrame
 		/** Holds the components of the standard Hamming Distance operations 
 		 (everything but creative component) */
 		JPanel standardPanel = new JPanel(new GridLayout(3,1));
-			/** Panel containing slider, text field, and button */
-			JPanel standard1 = new JPanel(new GridLayout(4, 1));
+			/** Panel containing JLabel and JTextField, slider, and button, and text field */
+			JPanel standard1 = new JPanel();
 			/** Panel containing drop-down menu, "Calculate" button, 5 JLabels and 5 JTextFields,
 			 and "Add Station" button and field */
 			JPanel standard2 = new JPanel(new GridLayout(8, 2));
@@ -58,10 +64,23 @@ public class GraphicalHammingDistanceFrame extends JFrame
 		// Components contained in the panel standard1
 		//==================================================================================================================
 				
-		JLabel distanceLabel = new JLabel("Enter Hamming distance");
-		JTextField distanceEntry = new JTextField("");
+		JLabel distanceLabel = new JLabel("Enter Hamming Dist:");
+		JTextField distanceField = new JTextField("2");
 		
-		JSlider distanceSlider = new JSlider(0, 4, 2);
+		JSlider distanceSlider = new JSlider(1, 4, 2);
+		
+		JButton showStationButton = new JButton("Show Station");
+		
+		JTextArea stationResultsField = new JTextArea();
+		
+		//==================================================================================================================
+		// Components contained in the panel standard2
+		//==================================================================================================================
+				
+		JLabel compareLabel = new JLabel("Compare with:");
+		JComboBox<String> dropDownBox = new JComboBox<String>();
+		
+		GridBagConstraints layoutConst = null;
 		
 		
 		
@@ -69,25 +88,95 @@ public class GraphicalHammingDistanceFrame extends JFrame
 		{
 			super("GraphicalHammingDistanceFrame");
 			this.setSize(FRAME_WIDTH, FRAME_HEIGHT);
-	        this.setLayout(new GridLayout(2, 0));
+	        this.setLayout(new GridBagLayout());
+	        
+	        distanceField.setEditable(false);
+	        distanceSlider.setMajorTickSpacing(1);
+	        distanceSlider.setPaintLabels(true);
+	        distanceSlider.setPaintTicks(true);
+	        
+	        ////////////////////////////////////
+	        // Add components to standard1 panel
+	        layoutConst = new GridBagConstraints();
+			layoutConst.gridx = 0;
+			layoutConst.gridy = 0;
+			standard1.add(distanceLabel);
 			
-			// TODO: add components to sub-panels
+			layoutConst.gridy = 1;
+			standard1.add(distanceField);
+			
+			layoutConst.gridx = 1;
+			layoutConst.gridy = 0;
 			standard1.add(distanceSlider);
 			
+			layoutConst.gridx = 2;
+			standard1.add(showStationButton);
+			
+			stationResultsField.setColumns(75);
+			stationResultsField.setRows(120);
+			layoutConst.gridx = 3;
+			standard1.add(stationResultsField);
+			
+			//////////////////////////////////		
+			// Add components to standard2 panel
+	        layoutConst = new GridBagConstraints();
+			layoutConst.gridx = 0;
+			layoutConst.gridy = 0;
+			standard2.add(compareLabel);
+			
+			dropDownBox.addItem("Hello");
+			dropDownBox.addItem("Yes");
+
+			
+			
+			layoutConst.gridy = 1;
+			standard2.add(dropDownBox);
+			
+			
+			
+			
+			
 			// Add components to sub-panels
+			layoutConst = new GridBagConstraints();
+			layoutConst.gridx = 0;
+			layoutConst.gridy = 0;
+			
 			standardPanel.add(standard1);
+			
+			layoutConst.gridx = 1;
 			standardPanel.add(standard2);
+			///////////////////////////////
 			
 			// Add panels to main panel
+			layoutConst = new GridBagConstraints();
+			layoutConst.gridx = 0;
+			layoutConst.gridy = 0;
+			
 			mainPanel.add(standardPanel);
+			
+			layoutConst.gridy = 1;
 			mainPanel.add(creativePanel);
+			//////////////////////////////
 			
 			// Add all panels to frame
 			this.add(mainPanel);
-			this.add(ghdPanel);
+			// TODO: this.add(ghdPanel);
 			
 			
 			// TODO
+			
+			dropDownBox.addActionListener((e) -> {
+				String stationID = (String)dropDownBox.getSelectedItem();
+				dropDownBox.setSelectedItem(stationID);
+				
+				
+			});
+
+			
+			distanceSlider.addChangeListener((l) -> {
+				int value = distanceSlider.getValue();
+				distanceField.setText(Integer.toString(value));
+			});
 			
 			
 			

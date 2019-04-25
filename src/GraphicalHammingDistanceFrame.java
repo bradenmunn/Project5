@@ -56,7 +56,7 @@ public class GraphicalHammingDistanceFrame extends JFrame
 			JPanel standard1 = new JPanel();
 			/** Panel containing drop-down menu, "Calculate" button, 5 JLabels and 5 JTextFields,
 			 and "Add Station" button and field */
-			JPanel standard2 = new JPanel(new GridLayout(8, 2));
+			JPanel standard2 = new JPanel();
 		/** Panel containing the creative aspect of the project */
 		JPanel creativePanel = new JPanel(new GridLayout(2,1));
 		
@@ -88,15 +88,17 @@ public class GraphicalHammingDistanceFrame extends JFrame
 		{
 			super("GraphicalHammingDistanceFrame");
 			this.setSize(FRAME_WIDTH, FRAME_HEIGHT);
-	        this.setLayout(new GridBagLayout());
+	        this.setLayout(new GridLayout(1, 2));
 	        
 	        distanceField.setEditable(false);
 	        distanceSlider.setMajorTickSpacing(1);
 	        distanceSlider.setPaintLabels(true);
 	        distanceSlider.setPaintTicks(true);
 	        
-	        ////////////////////////////////////
-	        // Add components to standard1 panel
+	        ///////////////////////////////////////
+	        // Add components to standard1 panel //
+	        ///////////////////////////////////////
+	        
 	        layoutConst = new GridBagConstraints();
 			layoutConst.gridx = 0;
 			layoutConst.gridy = 0;
@@ -117,18 +119,19 @@ public class GraphicalHammingDistanceFrame extends JFrame
 			layoutConst.gridx = 3;
 			standard1.add(stationResultsField);
 			
-			//////////////////////////////////		
-			// Add components to standard2 panel
+			///////////////////////////////////////	
+			// Add components to standard2 panel //
+			///////////////////////////////////////
+			
 	        layoutConst = new GridBagConstraints();
 			layoutConst.gridx = 0;
 			layoutConst.gridy = 0;
 			standard2.add(compareLabel);
 			
-			dropDownBox.addItem("Hello");
-			dropDownBox.addItem("Yes");
-
 			
-			
+			dropDownBox.addItem("NRMN");
+			layoutConst = new GridBagConstraints();
+			layoutConst.gridx = 0;
 			layoutConst.gridy = 1;
 			standard2.add(dropDownBox);
 			

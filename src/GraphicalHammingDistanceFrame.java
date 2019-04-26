@@ -261,6 +261,17 @@ public class GraphicalHammingDistanceFrame extends JFrame
 				distanceField.setText(Integer.toString(value));
 			});
 			
+			dropDownBox.addActionListener((e) -> {
+				String item = (String)dropDownBox.getSelectedItem();
+				dropDownBox.setSelectedItem(item);
+			});
+			
+			addStation.addActionListener((e) -> {
+				String stationID = stationField.getText();
+				if(stationID.length() == 4)
+					dropDownBox.addItem(stationID);
+				stationField.setText("");
+			});
 			
 			
 			this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

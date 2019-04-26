@@ -4,6 +4,7 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -263,6 +264,20 @@ public class GraphicalHammingDistanceFrame extends JFrame
 				distanceField.setText(Integer.toString(value));
 			});
 			
+			showStationButton.addActionListener((e) -> {
+				
+				ArrayList<String> stations = getStationList();
+		
+				String toPrint = "";
+				for(int i = 0; i < stations.size(); ++i)
+				{
+					toPrint += stations.get(i) + "\n";
+				}
+				stationResultsField.setText(toPrint);
+				
+				
+			});
+			
 			dropDownBox.addActionListener((e) -> {
 				String item = (String)dropDownBox.getSelectedItem();
 				dropDownBox.setSelectedItem(item);
@@ -305,6 +320,25 @@ public class GraphicalHammingDistanceFrame extends JFrame
 			}
 			
 			return results;
+		}
+		
+		public ArrayList<String> getStationList()
+		{
+			HammingDistance hd = new HammingDistance();
+			
+			int target = Integer.parseInt(distanceField.getText());
+			String word = (String)dropDownBox.getSelectedItem();
+			ArrayList<String> stations = new ArrayList<String>();
+			
+			try {
+				stations = hd.getStationList(word, target);
+			} 
+			catch (IOException e) {
+				e.printStackTrace();
+				System.out.println(e.getMessage());
+			}
+			
+			return stations;
 		}
 		
 

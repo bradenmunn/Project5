@@ -1,23 +1,11 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class HammingDistance {
 
 	private String fileName = "Mesonet.txt";
-	
-	
-	public int getHammingDistance(String str1, String str2)
-	{
-		int count = 0;
-		for(int i = 0; i < str1.length(); ++i)
-		{
-			// If the letters in a position are NOT the same, increase the count
-			if(str1.charAt(i) != str2.charAt(i))
-				++count;
-		}
-		return count;
-	}
 	
 	
 	public int[] checkAgainstAllWords(String word) throws IOException
@@ -53,5 +41,40 @@ public class HammingDistance {
 		br.close();
 		
 		return results;
+	}
+	
+	public int getHammingDistance(String str1, String str2)
+	{
+		int count = 0;
+		for(int i = 0; i < str1.length(); ++i)
+		{
+			// If the letters in a position are NOT the same, increase the count
+			if(str1.charAt(i) != str2.charAt(i))
+				++count;
+		}
+		return count;
+	}
+	
+	public ArrayList<String> getStationList(String word, int target) throws IOException
+	{
+		BufferedReader br = new BufferedReader(new FileReader(fileName));
+		
+		ArrayList<String> stations = new ArrayList<String>();
+		
+		// As long as the file has more lines, ...
+		while(br.ready())
+		{
+			// Takes out the 4 letter word from the string
+			String str = br.readLine().substring(0, 4);
+			
+			int hDistance = getHammingDistance(word, str);
+			if(hDistance == target)
+				stations.add(str);
+			
+		}
+		
+		br.close();
+		
+		return stations;
 	}
 }

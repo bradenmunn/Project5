@@ -5,12 +5,15 @@ import java.awt.GridLayout;
 import java.awt.Insets;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.TreeMap;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JSlider;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -39,7 +42,6 @@ public class GraphicalHammingDistanceFrame extends JFrame
 		public GraphicalHammingDistancePanel()
 		{
 			this.setPreferredSize(new Dimension(FRAME_WIDTH, FRAME_HEIGHT));
-			// TODO
 		}
 	}
 	
@@ -72,6 +74,7 @@ public class GraphicalHammingDistanceFrame extends JFrame
 		JButton showStationButton = new JButton("Show Station");
 		
 		JTextArea stationResultsField = new JTextArea();
+		JScrollPane sp = new JScrollPane(stationResultsField);
 		
 		//==================================================================================================================
 		// Components contained in the panel standard2
@@ -80,6 +83,7 @@ public class GraphicalHammingDistanceFrame extends JFrame
 		JLabel compareLabel = new JLabel("Compare with:");
 		
 		JComboBox<String> dropDownBox = new JComboBox<String>();
+		ArrayList<String> dropDownContents = new ArrayList<String>();
 		
 		JButton calculate = new JButton("Calculate HD");
 		
@@ -108,7 +112,7 @@ public class GraphicalHammingDistanceFrame extends JFrame
 		
 		
 		//==================================================================================================================
-		// Components contained in the panel standard2
+		// End of Field Variables
 		//==================================================================================================================
 
 		public GraphicalHammingDistanceFrame()
@@ -153,7 +157,7 @@ public class GraphicalHammingDistanceFrame extends JFrame
 			layoutConst.gridy = 3;
 			layoutConst.gridwidth = 2;
 			layoutConst.fill = GridBagConstraints.HORIZONTAL;
-			standard1.add(stationResultsField, layoutConst);
+			standard1.add(sp, layoutConst);
 			
 			///////////////////////////////////////	
 			// Add components to standard2 panel //
@@ -167,7 +171,7 @@ public class GraphicalHammingDistanceFrame extends JFrame
 			standard2.add(compareLabel, layoutConst);
 			
 			layoutConst = new GridBagConstraints();
-			dropDownBox.addItem("NRMN");
+			addNewItem("NRMN");
 			layoutConst.gridx = 1;
 			layoutConst.gridy = 0;
 			standard2.add(dropDownBox, layoutConst);
@@ -258,6 +262,8 @@ public class GraphicalHammingDistanceFrame extends JFrame
 			this.add(standardPanel);
 			this.add(creativePanel);
 			
+			
+			
 
 			distanceSlider.addChangeListener((l) -> {
 				int value = distanceSlider.getValue();
@@ -285,9 +291,11 @@ public class GraphicalHammingDistanceFrame extends JFrame
 			
 			addStation.addActionListener((e) -> {
 				String stationID = stationField.getText();
-				if(stationID.length() == 4)
-					dropDownBox.addItem(stationID);
-				stationField.setText("");
+				if(stationID.length() == 4 && !dropDownContents.contains(stationID))
+				{
+					addNewItem(stationID);
+					stationField.setText("");
+				}
 			});
 			
 			calculate.addActionListener((e) -> {
@@ -339,6 +347,17 @@ public class GraphicalHammingDistanceFrame extends JFrame
 			}
 			
 			return stations;
+		}
+		
+		public void addNewItem(String stationID)
+		{
+			dropDownContents.add(stationID);
+			Collections.sort(dropDownContents);
+			dropDownBox.removeAllItems();
+			for(String station: dropDownContents)
+			{
+				dropDownBox.addItem(station);
+			}
 		}
 		
 

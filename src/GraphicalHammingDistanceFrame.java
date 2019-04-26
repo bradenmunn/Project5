@@ -49,7 +49,7 @@ public class GraphicalHammingDistanceFrame extends JFrame
 		
 		/** Holds the components of the standard Hamming Distance operations 
 		 (everything but creative component) */
-		JPanel standardPanel = new JPanel(new GridLayout(3,1));
+		JPanel standardPanel = new JPanel();
 			/** Panel containing JLabel and JTextField, slider, and button, and text field */
 			JPanel standard1 = new JPanel();
 			/** Panel containing drop-down menu, "Calculate" button, 5 JLabels and 5 JTextFields,
@@ -63,7 +63,7 @@ public class GraphicalHammingDistanceFrame extends JFrame
 		//==================================================================================================================
 				
 		JLabel distanceLabel = new JLabel("Enter Hamming Dist:");
-		JTextField distanceField = new JTextField("2");
+		JTextField distanceField = new JTextField("2", 5);
 		
 		JSlider distanceSlider = new JSlider(1, 4, 2);
 		
@@ -92,6 +92,10 @@ public class GraphicalHammingDistanceFrame extends JFrame
 		JTextField dist2Field = new JTextField();
 		JTextField dist3Field = new JTextField();
 		JTextField dist4Field = new JTextField();
+		
+		JButton addStation = new JButton("Add Station");
+		
+		JTextField stationField = new JTextField();
 		
 		
 		
@@ -127,19 +131,25 @@ public class GraphicalHammingDistanceFrame extends JFrame
 			standard1.add(distanceLabel, layoutConst);
 		
 			layoutConst.gridx = 1;
+			layoutConst.fill = GridBagConstraints.HORIZONTAL;
 			standard1.add(distanceField, layoutConst);
 			
 			layoutConst = new GridBagConstraints();
 			layoutConst.gridx = 0;
 			layoutConst.gridy = 1;
+			layoutConst.anchor = GridBagConstraints.LINE_START;
 			standard1.add(distanceSlider, layoutConst);
 			
+			layoutConst = new GridBagConstraints();
 			layoutConst.gridy = 2;
 			standard1.add(showStationButton, layoutConst);
 			
+			stationResultsField.setEditable(false);
 			stationResultsField.setColumns(10);
 			stationResultsField.setRows(10);
 			layoutConst.gridy = 3;
+			layoutConst.gridwidth = 2;
+			layoutConst.fill = GridBagConstraints.HORIZONTAL;
 			standard1.add(stationResultsField, layoutConst);
 			
 			///////////////////////////////////////	
@@ -165,20 +175,71 @@ public class GraphicalHammingDistanceFrame extends JFrame
 			
 			layoutConst.gridx = 0;
 			layoutConst.gridy = 2;
+			standard2.add(dist0Label, layoutConst);
+			
+			// Distance labels and fields
+			dist0Field.setEditable(false);
+			layoutConst.gridx = 1;
+			layoutConst.fill = GridBagConstraints.HORIZONTAL;
+			standard2.add(dist0Field, layoutConst);
+			
+			layoutConst = new GridBagConstraints();
+			layoutConst.gridx = 0;
+			layoutConst.gridy = 3;
 			standard2.add(dist1Label, layoutConst);
 			
-			dist1Field.setSize(50, 10);
 			dist1Field.setEditable(false);
 			layoutConst.gridx = 1;
+			layoutConst.fill = GridBagConstraints.HORIZONTAL;
 			standard2.add(dist1Field, layoutConst);
 			
+			layoutConst = new GridBagConstraints();
+			layoutConst.gridx = 0;
+			layoutConst.gridy = 4;
+			standard2.add(dist2Label, layoutConst);
 			
+			dist2Field.setEditable(false);
+			layoutConst.gridx = 1;
+			layoutConst.fill = GridBagConstraints.HORIZONTAL;
+			standard2.add(dist2Field, layoutConst);
+			
+			layoutConst = new GridBagConstraints();
+			layoutConst.gridx = 0;
+			layoutConst.gridy = 5;
+			standard2.add(dist3Label, layoutConst);
+			
+			dist3Field.setEditable(false);
+			layoutConst.gridx = 1;
+			layoutConst.fill = GridBagConstraints.HORIZONTAL;
+			standard2.add(dist3Field, layoutConst);
+			
+			layoutConst = new GridBagConstraints();
+			layoutConst.gridx = 0;
+			layoutConst.gridy = 6;
+			standard2.add(dist4Label, layoutConst);
+			
+			dist4Field.setEditable(false);
+			layoutConst.gridx = 1;
+			layoutConst.fill = GridBagConstraints.HORIZONTAL;
+			standard2.add(dist4Field, layoutConst);
+			
+			layoutConst = new GridBagConstraints();
+			layoutConst.gridx = 0;
+			layoutConst.gridy = 7;
+			standard2.add(addStation, layoutConst);
+			
+			dist4Field.setEditable(true);
+			layoutConst.gridx = 1;
+			layoutConst.fill = GridBagConstraints.HORIZONTAL;
+			standard2.add(stationField, layoutConst);
 			
 			
 			// Add child panels to parent panel
 			standardPanel.setLayout(new GridBagLayout());
+	        standardPanel.setPreferredSize(new Dimension(FRAME_WIDTH, FRAME_HEIGHT - 300));
 			
 			layoutConst = new GridBagConstraints();
+			layoutConst.fill = GridBagConstraints.VERTICAL;
 			layoutConst.gridx = 0;
 			layoutConst.gridy = 0;
 			
@@ -186,25 +247,15 @@ public class GraphicalHammingDistanceFrame extends JFrame
 			
 			layoutConst.gridy = 1;
 			standardPanel.add(standard2, layoutConst);
-			///////////////////////////////
 			
+
+			///////////////////////////////
 			
 			// Add all panels to frame
 			this.add(standardPanel);
 			this.add(creativePanel);
-			// TODO: this.add(ghdPanel);
 			
-			
-			// TODO
-			
-			dropDownBox.addActionListener((e) -> {
-				String stationID = (String)dropDownBox.getSelectedItem();
-				dropDownBox.setSelectedItem(stationID);
-				
-				
-			});
 
-			
 			distanceSlider.addChangeListener((l) -> {
 				int value = distanceSlider.getValue();
 				distanceField.setText(Integer.toString(value));

@@ -3,6 +3,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -22,8 +23,8 @@ import javax.swing.JTextField;
 @SuppressWarnings("serial")
 public class GraphicalHammingDistanceFrame extends JFrame
 {
-	private static final int FRAME_WIDTH = 700;
-	private static final int FRAME_HEIGHT = 800;
+	private static final int FRAME_WIDTH = 525;
+	private static final int FRAME_HEIGHT = 530;
 	
 	/**
 	 * Interactive panel that the user clicks on to modify calculation of HammingDistance between stations. 
@@ -114,6 +115,7 @@ public class GraphicalHammingDistanceFrame extends JFrame
 			super("GraphicalHammingDistanceFrame");
 			this.setSize(FRAME_WIDTH, FRAME_HEIGHT);
 	        this.setLayout(new GridLayout(1, 2));
+	      
 	        
 	        distanceField.setEditable(false);
 	        distanceSlider.setMajorTickSpacing(1);
@@ -236,7 +238,7 @@ public class GraphicalHammingDistanceFrame extends JFrame
 			
 			// Add child panels to parent panel
 			standardPanel.setLayout(new GridBagLayout());
-	        standardPanel.setPreferredSize(new Dimension(FRAME_WIDTH, FRAME_HEIGHT - 300));
+	        standardPanel.setPreferredSize(new Dimension(FRAME_WIDTH, FRAME_HEIGHT));
 			
 			layoutConst = new GridBagConstraints();
 			layoutConst.fill = GridBagConstraints.VERTICAL;
@@ -273,9 +275,36 @@ public class GraphicalHammingDistanceFrame extends JFrame
 				stationField.setText("");
 			});
 			
+			calculate.addActionListener((e) -> {
+				/** Stores the count of words in the text file that have a hamming distance
+				 *  of 0, 1, 2, 3, and 4 with the selected word*/
+				int[] hammingNodes = getHammingDistance();
+				dist0Field.setText(Integer.toString(hammingNodes[0]));
+				dist1Field.setText(Integer.toString(hammingNodes[1]));
+				dist2Field.setText(Integer.toString(hammingNodes[2]));
+				dist3Field.setText(Integer.toString(hammingNodes[3]));
+				dist4Field.setText(Integer.toString(hammingNodes[4]));
+			});
+			
 			
 			this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	        this.setVisible(true);
+		}
+		
+		public int[] getHammingDistance()
+		{
+			HammingDistance hd = new HammingDistance();
+			String currentStation = (String)dropDownBox.getSelectedItem();
+			int[] results = new int[5];
+			try {
+				results = hd.checkAgainstAllWords(currentStation);
+			} 
+			catch (IOException e) {
+				e.printStackTrace();
+				System.out.println(e.getMessage());
+			}
+			
+			return results;
 		}
 		
 

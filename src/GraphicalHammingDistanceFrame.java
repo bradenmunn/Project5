@@ -103,6 +103,10 @@ public class GraphicalHammingDistanceFrame extends JFrame
 		
 		JTextField stationField = new JTextField();
 		
+		//==================================================================================================================
+		// Components contained in the panel standard2
+		//==================================================================================================================
+
 		
 		
 		
@@ -235,7 +239,6 @@ public class GraphicalHammingDistanceFrame extends JFrame
 			layoutConst.gridy = 7;
 			standard2.add(addStation, layoutConst);
 			
-			dist4Field.setEditable(true);
 			layoutConst.gridx = 1;
 			layoutConst.fill = GridBagConstraints.HORIZONTAL;
 			standard2.add(stationField, layoutConst);

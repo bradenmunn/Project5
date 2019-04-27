@@ -314,6 +314,14 @@ public class GraphicalHammingDistanceFrame extends JFrame
 	        this.setVisible(true);
 		}
 		
+		/**
+		 * Creates a HammingDistance object and uses the selected item in the JComboBox to
+		 * generate an int array of the number of stations in the list that have hamming 
+		 * distances of 0, 1, 2, 3, and 4.
+		 * @return int[] where index at 0 is the number of stations of hamming distance 0 
+		 * with the selected word, index 1 contains the number of stations of hamming distance 
+		 * 1 with the selected word, and so on through the end of the array (length = 5)
+		 */
 		public int[] getHammingDistance()
 		{
 			HammingDistance hd = new HammingDistance();

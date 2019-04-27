@@ -104,10 +104,14 @@ public class GraphicalHammingDistanceFrame extends JFrame
 		JTextField stationField = new JTextField();
 		
 		//==================================================================================================================
-		// Components contained in the panel standard2
+		// Components contained in the panel creative
 		//==================================================================================================================
 
+		JButton generateRandom = new JButton("Generate Random");
 		
+		JTextField randomStationID = new JTextField("", 5);
+		
+		JButton addAndCalculate = new JButton("Add & Calculate");
 		
 		
 		
@@ -136,6 +140,7 @@ public class GraphicalHammingDistanceFrame extends JFrame
 	        ///////////////////////////////////////
 	        standard1.setLayout(new GridBagLayout());
 	        
+	        // Enter Distance button and distance field
 	        layoutConst = new GridBagConstraints();
 			layoutConst.gridx = 0;
 			layoutConst.gridy = 0;
@@ -145,12 +150,14 @@ public class GraphicalHammingDistanceFrame extends JFrame
 			layoutConst.fill = GridBagConstraints.HORIZONTAL;
 			standard1.add(distanceField, layoutConst);
 			
+			// Slider
 			layoutConst = new GridBagConstraints();
 			layoutConst.gridx = 0;
 			layoutConst.gridy = 1;
 			layoutConst.anchor = GridBagConstraints.LINE_START;
 			standard1.add(distanceSlider, layoutConst);
 			
+			// Show station button and field
 			layoutConst = new GridBagConstraints();
 			layoutConst.gridy = 2;
 			standard1.add(showStationButton, layoutConst);
@@ -234,6 +241,7 @@ public class GraphicalHammingDistanceFrame extends JFrame
 			layoutConst.fill = GridBagConstraints.HORIZONTAL;
 			standard2.add(dist4Field, layoutConst);
 			
+			// Add station button and field
 			layoutConst = new GridBagConstraints();
 			layoutConst.gridx = 0;
 			layoutConst.gridy = 7;
@@ -242,6 +250,27 @@ public class GraphicalHammingDistanceFrame extends JFrame
 			layoutConst.gridx = 1;
 			layoutConst.fill = GridBagConstraints.HORIZONTAL;
 			standard2.add(stationField, layoutConst);
+			
+			///////////////////////////////////////	
+			// Add components to creative panel //
+			///////////////////////////////////////
+			creativePanel.setLayout(new GridBagLayout());
+			
+			layoutConst = new GridBagConstraints();
+			layoutConst.gridx = 0;
+			layoutConst.gridy = 0;
+			layoutConst.fill = GridBagConstraints.CENTER;
+			creativePanel.add(generateRandom, layoutConst);
+			
+			randomStationID.setEditable(false);
+			layoutConst.gridx = 1;
+			layoutConst.fill = GridBagConstraints.CENTER;
+			creativePanel.add(randomStationID, layoutConst);
+			
+			layoutConst.gridx = 0;
+			layoutConst.gridy = 2;
+			layoutConst.gridwidth = 2;
+			creativePanel.add(addAndCalculate, layoutConst);
 			
 			
 			// Add child panels to parent panel
@@ -312,6 +341,12 @@ public class GraphicalHammingDistanceFrame extends JFrame
 				dist4Field.setText(Integer.toString(hammingNodes[4]));
 			});
 			
+			generateRandom.addActionListener((e) -> {
+				String randomStation = generateRandomStation();
+				randomStationID.setText(randomStation);
+				
+			});
+			
 			
 			this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	        this.setVisible(true);
@@ -369,6 +404,12 @@ public class GraphicalHammingDistanceFrame extends JFrame
 			{
 				dropDownBox.addItem(station);
 			}
+		}
+		
+		public String generateRandomStation()
+		{
+			RandomStation rs = new RandomStation();
+			return rs.generateRandomStation();
 		}
 		
 

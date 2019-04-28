@@ -315,6 +315,9 @@ public class GraphicalHammingDistanceFrame extends JFrame
 				}
 				stationResultsField.setText(toPrint);
 				
+				// Starts the scroll bar at the top
+				stationResultsField.setCaretPosition(0);
+				
 				
 			});
 			

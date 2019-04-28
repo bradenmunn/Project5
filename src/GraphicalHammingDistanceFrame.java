@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -267,6 +268,7 @@ public class GraphicalHammingDistanceFrame extends JFrame
 			layoutConst.fill = GridBagConstraints.CENTER;
 			creativePanel.add(randomStationID, layoutConst);
 			
+			addAndCalculate.setBackground(Color.PINK);
 			layoutConst.gridx = 0;
 			layoutConst.gridy = 2;
 			layoutConst.gridwidth = 2;
@@ -345,6 +347,29 @@ public class GraphicalHammingDistanceFrame extends JFrame
 				String randomStation = generateRandomStation();
 				randomStationID.setText(randomStation);
 				
+			});
+			
+			addAndCalculate.addActionListener((e) -> {
+				// Adds station to the station list
+				String stationID = randomStationID.getText();
+				if(stationID.length() == 4 && !dropDownContents.contains(stationID))
+				{
+					addNewItem(stationID);
+					stationField.setText("");
+				}
+				
+				dropDownBox.setSelectedItem(stationID);
+				
+				// Calculates HammingDistance
+				
+				/** Stores the count of words in the text file that have a hamming distance
+				 *  of 0, 1, 2, 3, and 4 with the selected word*/
+				int[] hammingNodes = getHammingDistance();
+				dist0Field.setText(Integer.toString(hammingNodes[0]));
+				dist1Field.setText(Integer.toString(hammingNodes[1]));
+				dist2Field.setText(Integer.toString(hammingNodes[2]));
+				dist3Field.setText(Integer.toString(hammingNodes[3]));
+				dist4Field.setText(Integer.toString(hammingNodes[4]));
 			});
 			
 			

@@ -25,7 +25,10 @@ import javax.swing.JTextField;
  * This overall project was conducted first by creating and positioning the JComponents in their 
  * proper positions in the frame, then by adding the functionality to all the components.
  * 
- * TODO: MORE DETAIL
+ * The overall frame contains 2 main panels: One for the "standard" components required
+ * from the write-up, the other for the creative addition. While the 2 main panels 
+ * were positioned in the frame using a GridLayout, each sub-panel arranged its components using a
+ * GridBagLayout with GridBagConstraints to allow for more freedom with positioning elements.
  *
  * @author Braden Munn
  * @version 2019-04-20
@@ -409,6 +412,14 @@ public class GraphicalHammingDistanceFrame extends JFrame
 		return results;
 	}
 	
+	/**
+	 * Creates a HammingDistance object that uses the selected word from the JComboBox and the integer
+	 * in the distance field to generate a list of station IDs from the file that have a hamming distance 
+	 * of that integer [Integer.parseInt(distanceField.getText())] with the 
+	 * word [(String)dropdownBox.getSelectedItem()].
+	 * @return ArrayList of station IDs that have a hamming distance of (the integer in the distance field)
+	 * with (the currently selected word in the JComboBox)
+	 */
 	public ArrayList<String> getStationList()
 	{
 		HammingDistance hd = new HammingDistance();

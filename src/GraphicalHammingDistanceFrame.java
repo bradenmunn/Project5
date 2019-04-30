@@ -7,8 +7,10 @@ import java.awt.Insets;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.TreeMap;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -191,7 +193,7 @@ public class GraphicalHammingDistanceFrame extends JFrame
 		standard2.add(compareLabel, layoutConst);
 		
 		layoutConst = new GridBagConstraints();
-		addNewItem("NRMN");
+		setupDropDownBox();
 		layoutConst.gridx = 1;
 		layoutConst.gridy = 0;
 		standard2.add(dropDownBox, layoutConst);
@@ -332,10 +334,10 @@ public class GraphicalHammingDistanceFrame extends JFrame
 		});
 		
 		/** Adds functionality to the dropDownBox to change selected item after clicking on a new item*/
-		dropDownBox.addActionListener((e) -> {
-			String item = (String)dropDownBox.getSelectedItem();
-			dropDownBox.setSelectedItem(item);
-		});
+//		dropDownBox.addActionListener((e) -> {
+//			String item = (String)dropDownBox.getSelectedItem();
+//			dropDownBox.setSelectedItem(item);
+//		});
 		
 		
 		addStation.addActionListener((e) -> {
@@ -469,6 +471,24 @@ public class GraphicalHammingDistanceFrame extends JFrame
 	{
 		RandomStation rs = new RandomStation();
 		return rs.generateRandomStation();
+	}
+	
+	private void setupDropDownBox()
+	{
+		HammingDistance hd = new HammingDistance();
+
+		// Attempts to read-in stations from a file
+		try {
+			dropDownContents = hd.getAllStations();
+			
+			for (String station : dropDownContents)
+			{
+				dropDownBox.addItem(station);
+			}
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 		
 

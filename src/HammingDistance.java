@@ -77,4 +77,22 @@ public class HammingDistance {
 		
 		return stations;
 	}
+	
+	public ArrayList<String> getAllStations() throws IOException
+	{
+		BufferedReader br = new BufferedReader(new FileReader(fileName));
+		
+		ArrayList<String> stations = new ArrayList<String>();
+		
+		// As long as the file has more lines, ...
+		while(br.ready())
+		{
+			String str = br.readLine().substring(0, 4);
+			stations.add(str);
+		}
+		
+		br.close();
+		
+		return stations;
+	}
 }

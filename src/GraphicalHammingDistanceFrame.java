@@ -138,7 +138,7 @@ public class GraphicalHammingDistanceFrame extends JFrame
 		stationResultsField.setColumns(10);
 		stationResultsField.setRows(10);
 		
-		// Setup panel 2 compponents
+		// Setup panel 2 components
 		dist0Field.setEditable(false);
 		dist1Field.setEditable(false);
 		dist2Field.setEditable(false);
@@ -150,7 +150,7 @@ public class GraphicalHammingDistanceFrame extends JFrame
         ///////////////////////////////////////
         standard1.setLayout(new GridBagLayout());
         
-        // Enter Distance button and distance field
+        // "Enter Distance" button and distance field
         layoutConst = new GridBagConstraints();
 		layoutConst.gridx = 0;
 		layoutConst.gridy = 0;
@@ -167,7 +167,7 @@ public class GraphicalHammingDistanceFrame extends JFrame
 		layoutConst.gridwidth = 2;
 		standard1.add(distanceSlider, layoutConst);
 		
-		// Show station button and field
+		// "Show station" button and field
 		layoutConst = new GridBagConstraints();
 		layoutConst.gridy = 2;
 		layoutConst.gridwidth = 2;
@@ -183,6 +183,7 @@ public class GraphicalHammingDistanceFrame extends JFrame
 		///////////////////////////////////////
 		standard2.setLayout(new GridBagLayout());
 		
+		// "Compare" button, drop-down box, and "Calculate" button
         layoutConst = new GridBagConstraints();
         layoutConst.anchor = GridBagConstraints.LINE_START; // TODO
 		layoutConst.gridx = 0;
@@ -199,11 +200,11 @@ public class GraphicalHammingDistanceFrame extends JFrame
 		layoutConst.gridy = 1;
 		standard2.add(calculate, layoutConst);
 		
+		// Distance labels and fields
 		layoutConst.gridx = 0;
 		layoutConst.gridy = 2;
 		standard2.add(dist0Label, layoutConst);
 		
-		// Distance labels and fields
 		layoutConst.gridx = 1;
 		layoutConst.fill = GridBagConstraints.HORIZONTAL;
 		standard2.add(dist0Field, layoutConst);
@@ -259,6 +260,7 @@ public class GraphicalHammingDistanceFrame extends JFrame
 		//////////////////////////////////////
 		creativePanel.setLayout(new GridBagLayout());
 		
+		// "Generate random" button, random station ID field, and "Add & Calculate" button
 		layoutConst = new GridBagConstraints();
 		layoutConst.gridx = 0;
 		layoutConst.gridy = 0;
@@ -302,13 +304,18 @@ public class GraphicalHammingDistanceFrame extends JFrame
 		
 		
 		
-		
+		/**
+		 * Functionality for the distance slider for hamming distances
+		 */
 		distanceSlider.addChangeListener((l) -> {
 			int value = distanceSlider.getValue();
 			distanceField.setText(Integer.toString(value));
 		});
 		
-		
+		/** 
+		 * Functionality to generate a list of stationIDs that have a hamming distance of
+		 * [the int in the distanceField] with [the word selected in the JComboBox]
+		 * */
 		showStationButton.addActionListener((e) -> {
 			
 			ArrayList<String> stations = getStationList();
@@ -324,7 +331,7 @@ public class GraphicalHammingDistanceFrame extends JFrame
 			stationResultsField.setCaretPosition(0);
 		});
 		
-		
+		/** Adds functionality to the dropDownBox to change selected item after clicking on a new item*/
 		dropDownBox.addActionListener((e) -> {
 			String item = (String)dropDownBox.getSelectedItem();
 			dropDownBox.setSelectedItem(item);
@@ -439,6 +446,10 @@ public class GraphicalHammingDistanceFrame extends JFrame
 		return stations;
 	}
 	
+	/**
+	 * Adds a new stationID to the list contained in the JComboBox
+	 * @param stationID the station to be added to the list
+	 */
 	public void addNewItem(String stationID)
 	{
 		dropDownContents.add(stationID);
@@ -450,6 +461,10 @@ public class GraphicalHammingDistanceFrame extends JFrame
 		}
 	}
 	
+	/**
+	 * Method to generate a random station ID
+	 * @return random 4-letter stationID
+	 */
 	public String generateRandomStation()
 	{
 		RandomStation rs = new RandomStation();

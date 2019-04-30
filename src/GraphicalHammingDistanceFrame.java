@@ -20,7 +20,12 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 /**
- * Class representing an interactive HammingDistance calculator.
+ * Class representing an interactive HammingDistance calculator. 
+ * 
+ * This overall project was conducted first by creating and positioning the JComponents in their 
+ * proper positions in the frame, then by adding the functionality to all the components.
+ * 
+ * TODO: MORE DETAIL
  *
  * @author Braden Munn
  * @version 2019-04-20
@@ -108,6 +113,12 @@ public class GraphicalHammingDistanceFrame extends JFrame
 	// End of Field Variables
 	//==================================================================================================================
 
+	/**
+	 * Creates a GUI that displays information about the Hamming Distances between any two 4-letter station 
+	 * IDs read in from a file. The frame has options for input and output of data, and involves a random
+	 * station generator that will generate a random series of 4 letters that can be added and used to calculate
+	 * hamming distance just like any of the station IDs read in from the original file.
+	 */
 	public GraphicalHammingDistanceFrame()
 	{
 		super("Hamming Distance Calculator");

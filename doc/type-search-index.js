@@ -1,0 +1,1 @@
+typeSearchIndex = [{"p":"<Unnamed>","l":"GraphicalHammingDistanceFrame"},{"p":"<Unnamed>","l":"HammingDistance"},{"p":"<Unnamed>","l":"RandomStation"}]

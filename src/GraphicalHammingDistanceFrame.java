@@ -333,13 +333,6 @@ public class GraphicalHammingDistanceFrame extends JFrame
 			stationResultsField.setCaretPosition(0);
 		});
 		
-		/** Adds functionality to the dropDownBox to change selected item after clicking on a new item*/
-//		dropDownBox.addActionListener((e) -> {
-//			String item = (String)dropDownBox.getSelectedItem();
-//			dropDownBox.setSelectedItem(item);
-//		});
-		
-		
 		addStation.addActionListener((e) -> {
 			String stationID = stationField.getText();
 			if(stationID.length() == 4 && !dropDownContents.contains(stationID))
@@ -473,6 +466,11 @@ public class GraphicalHammingDistanceFrame extends JFrame
 		return rs.generateRandomStation();
 	}
 	
+	/**
+	 * Instantiates the JComboBox with all the stationIDs from the file
+	 * in class HammingDistance.java
+	 * @see HammingDistance.java class
+	 */
 	private void setupDropDownBox()
 	{
 		HammingDistance hd = new HammingDistance();

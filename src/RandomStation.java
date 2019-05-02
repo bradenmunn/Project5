@@ -1,8 +1,16 @@
 import java.util.Random;
 
+/**
+ * Class to generate a random stationID
+ * @author Braden Munn
+ *
+ */
 public class RandomStation {
 	
-	
+	/**
+	 * Generates a random 4-letter station ID
+	 * @return 4-letter station ID (letters from 'A' - 'Z')
+	 */
 	public String generateRandomStation()
 	{
 		String station = "";

@@ -62,7 +62,7 @@ public class GraphicalHammingDistanceFrame extends JFrame
 	//==================================================================================================================
 			
 	JLabel distanceLabel = new JLabel("Enter Hamming Dist:");
-	JTextField distanceField = new JTextField("2", 5);
+	JTextField distanceField = new JTextField("2");
 	
 	JSlider distanceSlider = new JSlider(1, 4, 2);
 	

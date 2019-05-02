@@ -24,13 +24,19 @@ import javax.swing.JTextField;
 /**
  * Class representing an interactive HammingDistance calculator. 
  * 
- * This overall project was conducted first by creating and positioning the JComponents in their 
+ * This project was conducted first by creating and positioning the JComponents in their 
  * proper positions in the frame, then by adding the functionality to all the components.
  * 
  * The overall frame contains 2 main panels: One for the "standard" components required
  * from the write-up, the other for the creative addition. While the 2 main panels 
  * were positioned in the frame using a GridLayout, each sub-panel arranged its components using a
  * GridBagLayout with GridBagConstraints to allow for more freedom with positioning elements.
+ * 
+ * Functionality for the creative panel was added last, as the standard elements needed to be in 
+ * place and functioning for my creative addition to work. I created a random stationID generator 
+ * along with a button that simulatneously adds that stationID to the list (in the JComboBox), sets
+ * that stationID as the selected item in the JComboBox, and calculates the hamming distances just
+ * as the "Calulate HD" button would.
  *
  * @author Braden Munn
  * @version 2019-04-20

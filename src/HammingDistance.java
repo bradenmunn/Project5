@@ -61,6 +61,12 @@ public class HammingDistance {
 		return results;
 	}
 	
+	/**
+	 * Calculates the haming distance between the two given station IDs
+	 * @param str1 The first stationID to be compared
+	 * @param str2 The second stationID to be compared
+	 * @return The hamming distance between the two given stationIDs
+	 */
 	public int getHammingDistance(String str1, String str2)
 	{
 		int count = 0;
@@ -73,7 +79,17 @@ public class HammingDistance {
 		return count;
 	}
 	
-	public ArrayList<String> getStationList(String word, int target) throws IOException
+	/**
+	 * Generates a list of stationIDs that have a hamming distance of value 'target' with
+	 * the given 'stationID'		
+	 * @param stationID The stationID to be compared to the list
+	 * @param target The hamming distance chosen on the JSlider that determines the stationIDs 
+	 * that are returned. Any stationIDs from the file that have a hamming distance of this value with
+	 * the inputed stationID will be returned
+	 * @return The stationIDs that have a hamming distance of 'target' with 'stationID'
+	 * @throws IOException
+	 */
+	public ArrayList<String> getStationList(String stationID, int target) throws IOException
 	{
 		BufferedReader br = new BufferedReader(new FileReader(fileName));
 		
@@ -85,7 +101,7 @@ public class HammingDistance {
 			// Takes out the 4 letter word from the string
 			String str = br.readLine().substring(0, 4);
 			
-			int hDistance = getHammingDistance(word, str);
+			int hDistance = getHammingDistance(stationID, str);
 			if(hDistance == target)
 				stations.add(str);
 			
@@ -96,6 +112,11 @@ public class HammingDistance {
 		return stations;
 	}
 	
+	/**
+	 * Returns a list of all stationIDs in the file.
+	 * @return ArrayList of all the stationIDs in the file
+	 * @throws IOException
+	 */
 	public ArrayList<String> getAllStations() throws IOException
 	{
 		BufferedReader br = new BufferedReader(new FileReader(fileName));
